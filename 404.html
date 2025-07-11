@@ -2,33 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Redirecting...</title>
+  <title>Zaayko MoMo's</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+    }
+    h1 {
+      color: #d43f00;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    button {
+      background-color: #d43f00;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #b03000;
+    }
+  </style>
   <script>
     (function() {
-      // User ne jo path type kiya, usko lo
       var path = window.location.pathname;
-
-      // Naya path banayo jisme /main/ prefix ho
       var newUrl = "/main" + path;
-
-      // Check karo ki woh page exist karta hai ya nahi
       fetch(newUrl, { method: 'HEAD' })
         .then(function(response) {
           if (response.ok) {
-            // Page mil gaya → redirect kar do
             window.location.replace(newUrl);
           } else {
-            // Page nahi mila → Not Found message dikhao
-            document.body.innerHTML = "<h1>404 - Not Found</h1><p>The page <strong>" + path + "</strong> does not exist.</p>";
+            document.querySelector('.message').innerHTML =
+              "<h1>404 - Not Found</h1>" +
+              "<p>The page <strong>" + path + "</strong> does not exist.</p>";
           }
         })
         .catch(function(error) {
-          document.body.innerHTML = "<h1>Error</h1><p>Something went wrong.</p>";
+          document.querySelector('.message').innerHTML =
+            "<h1>Error</h1><p>Something went wrong.</p>";
         });
     })();
+
+    function goHome() {
+      window.location.href = "/main/home";
+    }
   </script>
 </head>
 <body>
-  <p>Redirecting... Please wait.</p>
+  <div class="container">
+    <div class="message">
+      <p>Redirecting... Please wait.</p>
+    </div>
+    <button onclick="goHome()">Go to Home Page</button>
+  </div>
 </body>
 </html>
