@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting...</title>
+  <script>
+    (function() {
+      // User ne jo path type kiya, usko lo
+      var path = window.location.pathname;
+
+      // Naya path banayo jisme /main/ prefix ho
+      var newUrl = "/main" + path;
+
+      // Check karo ki woh page exist karta hai ya nahi
+      fetch(newUrl, { method: 'HEAD' })
+        .then(function(response) {
+          if (response.ok) {
+            // Page mil gaya → redirect kar do
+            window.location.replace(newUrl);
+          } else {
+            // Page nahi mila → Not Found message dikhao
+            document.body.innerHTML = "<h1>404 - Not Found</h1><p>The page <strong>" + path + "</strong> does not exist.</p>";
+          }
+        })
+        .catch(function(error) {
+          document.body.innerHTML = "<h1>Error</h1><p>Something went wrong.</p>";
+        });
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting... Please wait.</p>
+</body>
+</html>
